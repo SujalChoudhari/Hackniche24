@@ -28,25 +28,25 @@ export function InputForm() {
               <label className="block text-sm font-medium mb-1" htmlFor="negative-prompt">
                 Negative Prompt
               </label>
-              <Input id="negative-prompt" placeholder="A prompt that describes a situation in which the generate..." />
+              <Input id="negative-prompt" placeholder="A prompt that describes what to avoid " />
             </div>
             <div className="mb-4">
               <label className="block text-sm font-medium mb-1" htmlFor="data-sources">
                 Data Sources
               </label>
-              <Input id="data-sources" placeholder="users, orders" />
+              <Input id="data-sources" placeholder="Table names (Comma separated)" />
             </div>
             <div className="mb-4">
               <label className="block text-sm font-medium mb-1" htmlFor="input-schema">
                 Input Schema
               </label>
-              <Textarea id="input-schema" placeholder="input schema" />
+              <Textarea id="input-schema" placeholder="Input schema" />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1" htmlFor="output-schema">
+              <label className="block text-sm font-medium mb-1" htmlFor="Output-schema">
                 Output Schema
               </label>
-              <Textarea id="output-schema" placeholder="output schema" />
+              <Textarea id="output-schema" placeholder="Output schema" />
             </div>
             <div className="flex justify-end mt-4">
             
