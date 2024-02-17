@@ -11,7 +11,7 @@ export function CodeEditor({ code, setCode, lang = "javascript", setLang }: { co
 
     return <>
         <Editor
-            height={(85) + 'vh'}
+            height={(70) + 'vh'}
             defaultLanguage={lang}
             theme="light"
             defaultValue={code}

@@ -8,18 +8,18 @@ export default function JSON() {
             <div className="absolute bottom-auto -z-10 left-auto right-0 top-12 h-[500px] w-[500px] -translate-x-[30%] translate-y-[20%] rounded-full bg-[rgba(173,109,244,0.5)] opacity-50 blur-[80px]"></div>
             <div className="bg-white p-8 h-full ">
                 <div className="mt-8 ">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="flex flex-col gap-4">
                         <div>
                             <Label className="text-sm  justify-center flex mb-3 font-medium" >
                                 Input JSON
                             </Label>
-                            <Textarea className="h-64 border-slate-100" placeholder="Enter input JSON here" />
+                            <Textarea className="min-h-32 border-slate-600 " placeholder="Enter input JSON here" />
                         </div>
                         <div>
                             <Label className="text-sm justify-center flex mb-3 font-medium" >
                                 Output JSON
                             </Label>
-                            <Textarea className="h-64 border-slate-100" id="output" placeholder="Output JSON will be displayed here" />
+                            <Textarea className="min-h-32 border-slate-600 " id="output" placeholder="Output JSON will be displayed here" />
                         </div>
 
                     </div>
