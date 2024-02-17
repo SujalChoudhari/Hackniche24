@@ -8,7 +8,8 @@ import {
 } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { HomeIcon } from "lucide-react";
+import { HomeIcon, LucideGitGraph } from "lucide-react";
+import { IconGraphOff } from "@tabler/icons-react";
 
 
 export const FloatingNav = ({
@@ -67,7 +68,7 @@ export const FloatingNav = ({
           )}
         >
           <span className="block sm:hidden"><HomeIcon /></span>
-          <span className="hidden sm:block text-lg">VersionByte</span>
+          <LucideGitGraph/><span className="hidden sm:block text-lg">VersionByte</span>
         </Link>
         {navItems.map((navItem: any, idx: number) => (
           <Link
