@@ -1,5 +1,5 @@
 "use client";
-import { TestCases } from "@/components/component/test-cases"
+import { OutputCases} from "@/components/component/inputs"
 import { VersionControl } from "@/components/component/version-control"
 import { CodeEditor } from "@/components/editor"
 import { LiveSync } from "@/components/livesync";
@@ -18,7 +18,8 @@ import { useAuth } from "@/context/AuthContext";
 import { Editor } from "@monaco-editor/react";
 import Modal from "@/components/component/modal";
 
-import InputOutput from "@/components/component/input-output";
+
+import { InputCases } from "@/components/component/outputs";
 
 export default function Dashboard() {
 
@@ -114,11 +115,11 @@ export default function Dashboard() {
 
           <ResizablePanelGroup direction="vertical" className="border ">
             <ResizablePanel defaultSize={20} minSize={20} className="">
-              <InputOutput inputRef={inputSchemaRef} outputRef={outputSchemaRef} />
+              <InputCases  />
             </ResizablePanel>
             <ResizableHandle withHandle className="border  " />
             <ResizablePanel defaultSize={20} minSize={40} className="">
-              <TestCases dataSourcesRef={dataSourcesRef} />
+              <OutputCases inputRef={inputSchemaRef} outputRef={outputSchemaRef} dataSourcesRef={dataSourcesRef} />
             </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>

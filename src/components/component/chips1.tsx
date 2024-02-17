@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useState } from "react";
 
-interface ChipTabsProps {
+interface ChipTabsProps1 {
   setSelectedTab: Dispatch<SetStateAction<string>>;
 }
 
-const tabs = ["Test Cases","Code Explanation"];
+const tabs = ["Data Sources", "Input JSON", "Output JSON"];
 
-const ChipTabs = ({ setSelectedTab }: ChipTabsProps) => {
+const ChipTabs1 = ({ setSelectedTab }: ChipTabsProps1) => {
   const [selected, setSelected] = useState(tabs[0]);
 
   const handleTabClick = (tab: string) => {
@@ -59,4 +59,4 @@ const Chip = ({
   );
 };
 
-export default ChipTabs;
+export default ChipTabs1;
