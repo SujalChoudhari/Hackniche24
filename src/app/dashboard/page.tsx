@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import PocketBase from 'pocketbase';
 import { useAuth } from "@/context/AuthContext";
+import { Editor } from "@monaco-editor/react";
 
 export default function Dashboard() {
 
@@ -32,7 +33,7 @@ export default function Dashboard() {
 
     const URL = `http://localhost:3000/api/refine?code=${code}&changes=${refinePromptRef.current?.value}&inputSchema=${inputSchemaRef.current?.value}&outputSchema=${outputSchemaRef.current?.value}&dataSources=${dataSourcesRef.current?.value}`
     const respose = await axios.get(URL);
-
+    console.log(respose.data)
     setLang(respose.data.language);
     setCode(respose.data.code)
 
@@ -52,6 +53,11 @@ export default function Dashboard() {
     const record = await pb.collection('history').create(data);
   }
 
+  function handleEditorChange(value: any, event: any) {
+    setCode(value);
+  }
+
+
   return (
     <ResizablePanelGroup
       direction="horizontal"
@@ -66,11 +72,14 @@ export default function Dashboard() {
       <ResizablePanel defaultSize={80}>
         <div className="">
           <div className="py-10 pt-20 bg-white border-4">
-            <CodeEditor
-              lang={lang}
-              setLang={setLang}
-              code={code}
-              setCode={setCode}
+            <Editor
+              height={(70) + 'vh'}
+              defaultLanguage={lang}
+              language={lang}
+              theme="light"
+              defaultValue={code}
+              value={code}
+              onChange={handleEditorChange}
             />
           </div>
 

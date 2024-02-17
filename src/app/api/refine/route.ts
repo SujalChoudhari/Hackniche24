@@ -87,10 +87,10 @@ export async function GET(request: any) {
         // return NextResponse.json({ error: "Query parameter is missing" }, { status: 400 });
 
         console.log(code, changes, inputSchema, outputSchema, dataSources)
-        const output = await run(promptMaker(code, changes, inputSchema, outputSchema, dataSources));
-        
-        var genCode = ""
-        var genLang = ""
+        var output: string = await run(promptMaker(code, changes, inputSchema, outputSchema, dataSources));
+        var outputAsArray = output.split("\n");
+        var genLang = outputAsArray[0].replaceAll("`", "")
+        var genCode = outputAsArray.slice(1, -1).join("\n");
         return NextResponse.json({ code: genCode, language: genLang }, { status: 200 });
     } catch (error: any) {
         console.error("Error:", error.message);
