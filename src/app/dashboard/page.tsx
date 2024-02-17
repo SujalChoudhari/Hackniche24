@@ -13,8 +13,8 @@ export default function ResizableDemo() {
       direction="horizontal"
       className="min-h-[200px] w-full rounded-lg border"
     >
-      <ResizablePanel defaultSize={20}>
-        <div className="flex h-full items-center justify-center p-6">
+      <ResizablePanel defaultSize={25} className=" min-w-[200px]">
+        <div className="flex h-full items-center justify-center p-6 border-2 border-purple-500 border-dashed">
           
           <VersionControl/>
           
@@ -33,8 +33,8 @@ export default function ResizableDemo() {
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={55}>
       
-      <ResizablePanelGroup direction="vertical" className="border">
-      <ResizablePanel defaultSize={20}>
+      <ResizablePanelGroup direction="vertical" className="border ">
+      <ResizablePanel defaultSize={20} className="bg-">
         <TestCases/>
       </ResizablePanel>
       <ResizableHandle withHandle className="border " />
