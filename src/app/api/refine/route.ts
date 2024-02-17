@@ -17,7 +17,7 @@ const promptMaker = (code: string, changes: string, inputSchema: string, outputS
     
     **Constraints:**
     - Refine the give code and perform the given changes.
-    - Ensure the code is well-structured, function-based, and bug-free.
+    - Ensure the code is well-structured and bug-free.
     - Include clear and concise comments or docstrings to explain the code's logic.
     - Code should be production ready.
     - Strictly follow the schemas for input and output.

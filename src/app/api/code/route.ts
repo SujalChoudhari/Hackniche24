@@ -11,19 +11,25 @@ const API_KEY = "AIzaSyBotyCfAUwlXLv1hcJdXliYmhVkcF_V0lU";
 
 
 
-const promptMaker = (question: string) => {
-    return `**Prompt:** ${question}
+const promptMaker = (changes: string, inputSchema: string, outputSchema: string, dataSources: string) => {
+    return `**Prompt:** ${changes}
     
     **Constraints:**
-    - Only provide the logical part of the code (no external dependencies needed) (if any comment it out).
-    - Ensure the code is well-structured, function-based, and bug-free.
+    - Write Correct code
+    - Code should be optimised and contain minimum lines of code.
     - Include clear and concise comments or docstrings to explain the code's logic.
+    - Code should be production ready.
+    - Strictly follow the schemas for input and output.
     
     **Desired Outcome:**
-    A WORKING code snippet that demonstrates the solution to the given problem, 
-    WITHOUT relying on external libraries or modules.
+    A WORKING code snippet that is works out of the box
     
-    **Example (if applicable):**`;
+    **Input Schema:** ${inputSchema}
+    **Output Schema:** ${outputSchema}
+
+    **Data Sources:** ${dataSources}
+
+    **Generated Code:** `;
 }
 
 async function run(text: string) {
@@ -71,15 +77,18 @@ async function run(text: string) {
 export async function GET(request: any) {
     try {
         // Extract text from the query parameter
-        const text = request.nextUrl.searchParams.get("query");
+        const changes = request.nextUrl.searchParams.get("changes");
+        const inputSchema = request.nextUrl.searchParams.get("inputSchema");
+        const outputSchema = request.nextUrl.searchParams.get("outputSchema");
+        const dataSources = request.nextUrl.searchParams.get("dataSources");
 
-        if (!text) {
-            // Handle the case where 'query' parameter is missing
-            return NextResponse.json({ error: "Query parameter is missing" }, { status: 400 });
-        }
 
-        const output = await run(promptMaker(text));
-        return NextResponse.json({ message: output }, { status: 200 });
+        console.log(changes, inputSchema, outputSchema, dataSources)
+        var output: string = await run(promptMaker(changes, inputSchema, outputSchema, dataSources));
+        var outputAsArray = output.split("\n");
+        var genLang = outputAsArray[0].replaceAll("`", "")
+        var genCode = outputAsArray.slice(1, -1).join("\n");
+        return NextResponse.json({ code: genCode, language: genLang }, { status: 200 });
     } catch (error: any) {
         console.error("Error:", error.message);
         // Return an error response if there's an issue

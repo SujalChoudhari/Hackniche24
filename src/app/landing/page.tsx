@@ -1,7 +1,8 @@
 "use client"
 import React from 'react'
 import Spline from '@splinetool/react-spline'
-// import TabsDemo from '@/components/component/exampletab'
+import TabsDemo from '@/components/component/exampletab'
+import { InfiniteMovingCardsDemo } from '@/components/component/infinite-moving-cards'
 
 export default function Landing() {
 
@@ -23,7 +24,11 @@ export default function Landing() {
       </div>
 
     </header>
-    {/* <TabsDemo /> */}
+    <TabsDemo />
+    <div>
+    <p className=' text-3xl md:text-3xl  items-center justify-center '>Customer Feedback</p>
+    </div>
+    <InfiniteMovingCardsDemo/>
     </main>
 
   )
