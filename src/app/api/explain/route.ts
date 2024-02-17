@@ -11,19 +11,19 @@ const API_KEY = "AIzaSyBotyCfAUwlXLv1hcJdXliYmhVkcF_V0lU";
 
 
 
-const promptMaker = (question: string) => {
-    return `**Prompt:** ${question}
-    
-    **Constraints:**
-    - Only provide the logical part of the code (no external dependencies needed) (if any comment it out).
-    - Ensure the code is well-structured, function-based, and bug-free.
-    - Include clear and concise comments or docstrings to explain the code's logic.
+const promptMaker = (code: string, inputSchema: string, outputSchema: string) => {
+    return `**Code:** ${code}
     
     **Desired Outcome:**
-    A WORKING code snippet that demonstrates the solution to the given problem, 
-    WITHOUT relying on external libraries or modules.
+    - Explain the code in minimum words
+    - Explain what it does, and how it does
+    - Show sample inputs or outputs
+    - Explain for a fresher
     
-    **Example (if applicable):**`;
+    **Input Schema:** ${inputSchema}
+    **Output Schema:** ${outputSchema}
+
+    **Explaination:** `;
 }
 
 async function run(text: string) {
@@ -71,15 +71,15 @@ async function run(text: string) {
 export async function GET(request: any) {
     try {
         // Extract text from the query parameter
-        const text = request.nextUrl.searchParams.get("query");
+        const code = request.nextUrl.searchParams.get("code");
+        const inputSchema = request.nextUrl.searchParams.get("inputSchema");
+        const outputSchema = request.nextUrl.searchParams.get("outputSchema");
 
-        if (!text) {
-            // Handle the case where 'query' parameter is missing
-            return NextResponse.json({ error: "Query parameter is missing" }, { status: 400 });
-        }
 
-        const output = await run(promptMaker(text));
-        return NextResponse.json({ message: output }, { status: 200 });
+        console.log(code, inputSchema, outputSchema)
+        var output: string = await run(promptMaker(code, inputSchema, outputSchema));
+
+        return NextResponse.json({ explaination:output }, { status: 200 });
     } catch (error: any) {
         console.error("Error:", error.message);
         // Return an error response if there's an issue

@@ -151,10 +151,10 @@ export default function Dashboard() {
 
           <ResizablePanelGroup direction="vertical" className="border ">
             <ResizablePanel defaultSize={20} minSize={20} className="">
-              <OutputChips />
+              <OutputChips code={code || ""} inputSchema={inputSchemaRef.current?.value || ""} outputSchema={outputSchemaRef.current?.value || ""} lang={lang || "python"} />
             </ResizablePanel>
             <ResizableHandle withHandle className="border  " />
-            <ResizablePanel defaultSize={20} minSize={40} className="">
+            <ResizablePanel defaultSize={20} minSize={10} className="">
               <InputChips inputRef={inputSchemaRef} outputRef={outputSchemaRef} dataSourcesRef={dataSourcesRef} />
             </ResizablePanel>
           </ResizablePanelGroup>

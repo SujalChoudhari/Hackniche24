@@ -9,21 +9,26 @@ const {
 const MODEL_NAME = "gemini-pro";
 const API_KEY = "AIzaSyBotyCfAUwlXLv1hcJdXliYmhVkcF_V0lU";
 
-const promptMaker = (question: string) => {
-    return `**Code:** ${question}
+
+
+const promptMaker = (code: string,) => {
+    return `**Code:** ${code}
     
     **Constraints:**
-    - Do not use any testing framwork, keep it limited to time and console based.
-    - On running the given code should print the results of the tests.
-    - If there is any dependency remove it, and write tests only for the logical part.
+    - Remove all dependency
+    - Keep only the logic
+    - Only provide the code, no Explaination or Outputs Expected
+    - Write code that only tests logic, create temp variables if needed
+    - If possible add time logic and print the execution time
+    - Use print statements to compare the expected output and generated output
+    - Call the functioanality in loop for testing multiple times
+    - ABSOLUTELY NO dependencies, only native functions and variables.
     
     **Desired Outcome:**
-    Same code with print statements in between which tally expected output and generated output, 
-    also time required for execution.
-    
-    **Code:**`;
-}
+    A dependency less code which can be ran on a blank environment
 
+    **Test Code:** `;
+}
 
 async function run(text: string) {
     const genAI = new GoogleGenerativeAI(API_KEY);
@@ -70,15 +75,13 @@ async function run(text: string) {
 export async function GET(request: any) {
     try {
         // Extract text from the query parameter
-        const text = request.nextUrl.searchParams.get("query");
-
-        if (!text) {
-            // Handle the case where 'query' parameter is missing
-            return NextResponse.json({ error: "Query parameter is missing" }, { status: 400 });
-        }
-
-        const output = await run(promptMaker(text));
-        return NextResponse.json({ message: output }, { status: 200 });
+        const code = request.nextUrl.searchParams.get("code");
+        var output: string = await run(promptMaker(code));
+        console.log(output)
+        var outputAsArray = output.split("\n");
+        var genLang = outputAsArray[0].replaceAll("`", "")
+        var genCode = outputAsArray.slice(1, -1).join("\n");
+        return NextResponse.json({ code: genCode, language: genLang }, { status: 200 });
     } catch (error: any) {
         console.error("Error:", error.message);
         // Return an error response if there's an issue
