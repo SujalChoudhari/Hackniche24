@@ -3,9 +3,7 @@ import Editor from '@monaco-editor/react';
 import { useState } from 'react';
 
 
-export function CodeEditor() {
-    const [lang, setlang] = useState("python");
-    const [code, setCode] = useState("");
+export function CodeEditor({ code, setCode, lang = "javascript", setLang }: { code: any, setCode: any, lang: any, setLang: any }) {
 
     function handleEditorChange(value: any, event: any) {
         setCode(value);
