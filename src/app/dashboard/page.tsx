@@ -55,7 +55,18 @@ export default function Dashboard() {
     const records = await pb.collection('history').getFullList({
       sort: '-created',
     });
-
+    const driverObj = driver({
+      showProgress: true,
+      steps: [
+        { element: '#versioncontrol', popover: { title: 'Version Control', description: 'Generate, convert into different languages and fine-tune code. Users can collaborate and intercept each other\'s iterations.', side: "left", align: 'start' } },
+        { element: '#editor', popover: { title: 'Code Editor', description: 'The Code Editor is a versatile tool designed to enhance coding experiences across various programming languages. With features like syntax highlighting, code completion, and error checking, it provides a seamless environment for writing and editing code.', side: "left", align: 'start' } },
+        { element: '#testcases', popover: { title: 'Test cases and Code explanation', description: 'Automate the generation of explanation and test cases with this tool, designed to streamline the software testing process', side: "left", align: 'start' } },
+        { element: '#input', popover: { title: 'Data Sources and JSON', description: 'Users can dynamically modify data and generate code again.', side: "right", align: 'start' } },
+        { element: '#export', popover: { title: 'Export to VS CODE', description: 'Integrate your code seamlessly', side: "right", align: 'start' } },
+        { element: '#refine', popover: { title: 'Iterations', description: 'Refine your code generations even convert it from one language to another.', side: "right", align: 'start' } }
+      ]
+    });
+    driverObj.drive();
 
     const data = {
       "userId": auth?.user?.uid,
@@ -71,6 +82,7 @@ export default function Dashboard() {
     const record = await pb.collection('history').create(data);
     console.log(data, record)
     toast.success("Generated Code")
+    
   }
 
   const onRefinePressed = async () => {
@@ -109,25 +121,7 @@ export default function Dashboard() {
   }
 
 
-  const driverObj = driver({
-    showProgress: true,
-    steps: [
-      
-      { element: '#versioncontrol', popover: { title: 'Version Control', description: 'Generate, convert into different languages and fine tune code. Users can collabrate and intercept each others iterations.', side: "left", align: 'start' } },
-      { element: '#editor', popover: { title: 'Code Editor', description: 'The Code Editor is a versatile tool designed to enhance coding experiences across various programming languages. With features like syntax highlighting, code completion, and error checking, it provides a seamless environment for writing and editing code.', side: "left", align: 'start' } },
-      { element: '#testcases', popover: { title: 'Test cases and Code explanation', description: 'Automate the generation of explanation and test cases with this tool, designed to streamline the software testing process', side: "left", align: 'start' } },
-
-      { element: '#input', popover: { title: 'Data Sources and JSON', description: 'Users can dynamicaly modify data and generate code again. ', side: "right", align: 'start' } },
-      { element: '#export', popover: { title: 'Export to VS CODE', description: 'Integrate your code seamlessly', side: "right", align: 'start' } },
-      { element: '#refine', popover: { title: 'Iterations', description: 'Refine your code generations even convert it from one laguage to other.', side: "right", align: 'start' } },
-
-    ]
-  });
-
-
-  useEffect(() => {
-    driverObj.drive()
-  }, [])
+  
 
   const exportToVSCode = () => {
     const content = code;
