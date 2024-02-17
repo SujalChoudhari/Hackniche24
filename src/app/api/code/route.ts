@@ -9,7 +9,22 @@ const {
 const MODEL_NAME = "gemini-pro";
 const API_KEY = "AIzaSyBotyCfAUwlXLv1hcJdXliYmhVkcF_V0lU";
 
-const PROMPT = "";
+
+
+const promptMaker = (question: string) => {
+    return `**Prompt:** ${question}
+    
+    **Constraints:**
+    - Only provide the logical part of the code (no external dependencies needed) (if any comment it out).
+    - Ensure the code is well-structured, function-based, and bug-free.
+    - Include clear and concise comments or docstrings to explain the code's logic.
+    
+    **Desired Outcome:**
+    A WORKING code snippet that demonstrates the solution to the given problem, 
+    WITHOUT relying on external libraries or modules.
+    
+    **Example (if applicable):**`;
+}
 
 async function run(text: string) {
     const genAI = new GoogleGenerativeAI(API_KEY);
@@ -63,7 +78,7 @@ export async function GET(request: any) {
             return NextResponse.json({ error: "Query parameter is missing" }, { status: 400 });
         }
 
-        const output = await run(PROMPT + " " + text);
+        const output = await run(promptMaker(text));
         return NextResponse.json({ message: output }, { status: 200 });
     } catch (error: any) {
         console.error("Error:", error.message);

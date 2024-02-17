@@ -8,7 +8,22 @@ const {
 
 const MODEL_NAME = "gemini-pro";
 const API_KEY = "AIzaSyBotyCfAUwlXLv1hcJdXliYmhVkcF_V0lU";
-const PROMPT = "";
+
+const promptMaker = (question: string) => {
+    return `**Code:** ${question}
+    
+    **Constraints:**
+    - Do not use any testing framwork, keep it limited to time and console based.
+    - On running the given code should print the results of the tests.
+    - If there is any dependency remove it, and write tests only for the logical part.
+    
+    **Desired Outcome:**
+    Same code with print statements in between which tally expected output and generated output, 
+    also time required for execution.
+    
+    **Code:**`;
+}
+
 
 async function run(text: string) {
     const genAI = new GoogleGenerativeAI(API_KEY);
@@ -62,7 +77,7 @@ export async function GET(request: any) {
             return NextResponse.json({ error: "Query parameter is missing" }, { status: 400 });
         }
 
-        const output = await run(PROMPT + " " + text);
+        const output = await run(promptMaker(text));
         return NextResponse.json({ message: output }, { status: 200 });
     } catch (error: any) {
         console.error("Error:", error.message);
