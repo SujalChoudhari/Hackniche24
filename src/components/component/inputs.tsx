@@ -1,3 +1,4 @@
+"use client"
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { CardContent, Card } from '@/components/ui/card';
@@ -14,17 +15,18 @@ export function OutputCases({ inputRef, outputRef, dataSourcesRef }: { inputRef:
   };
 
   return (
+    <div className='overflow-y-auto h-full'>
     <Card>
       <CardContent>
-        <div className="bg-white p-8 h-full ">
+        <div className="bg-white p-8 ">
           <div className="flex items-center space-x-4 mb-6 min-w-[300px]">
             <TerminalIcon className="text-black" />
           </div>
           <div className="flex flex-col space-y-4">
             <div className="flex space-x-2">
-              <ChipTabs1 setSelectedTab={setActiveTab} />
+              {/* <ChipTabs1 setSelectedTab={setActiveTab} /> */}
             </div>
-            {activeTab === "Data Sources" && (
+            {/* {activeTab === "Data Sources" && ( */}
               <div>
                 <Label className="text-sm font-medium" htmlFor="dataSource">
                   Data Sources:
@@ -37,27 +39,28 @@ export function OutputCases({ inputRef, outputRef, dataSourcesRef }: { inputRef:
                   placeholder="Enter data sources here..."
                 />
               </div>
-            )}
-            {activeTab === "Input JSON" && (
+            {/* )} */}
+            {/* {activeTab === "Input JSON" && ( */}
               <div>
                 <Label className="text-sm font-medium" htmlFor="input">
                   Input JSON
                 </Label>
                 <Textarea className="min-h-32" id="input" ref={inputRef} placeholder="Enter input JSON here" />
               </div>
-            )}
-            {activeTab === "Output JSON" && (
+            {/* )} */}
+            {/* {activeTab === "Output JSON" && ( */}
               <div>
                 <Label className="text-sm font-medium" htmlFor="output">
                   Output JSON
                 </Label>
                 <Textarea className="min-h-32" ref={outputRef} id="output" placeholder="Output JSON will be displayed here" />
               </div>
-            )}
+            {/* )} */}
             
           </div>
         </div>
       </CardContent>
     </Card>
+    </div>
   );
 }
