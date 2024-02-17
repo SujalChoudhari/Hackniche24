@@ -8,7 +8,6 @@ const {
 
 const MODEL_NAME = "gemini-pro";
 const API_KEY = "AIzaSyBotyCfAUwlXLv1hcJdXliYmhVkcF_V0lU";
-const PROMPT = "";
 
 async function run(text: string) {
     const genAI = new GoogleGenerativeAI(API_KEY);
@@ -62,7 +61,7 @@ export async function GET(request: any) {
             return NextResponse.json({ error: "Query parameter is missing" }, { status: 400 });
         }
 
-        const output = await run(PROMPT + " " + text);
+        const output = await run(text);
 
         return NextResponse.json({ message: output }, { status: 200 });
     } catch (error: any) {

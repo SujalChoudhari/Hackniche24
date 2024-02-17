@@ -12,6 +12,7 @@ export function OutputChips({ code, inputSchema, outputSchema, lang }: { code: s
   const [codeExplanation, setCodeExplanation] = useState('');
   const [generatedTestCases, setGeneratedTestCases] = useState('');
   const [runOutput, setRunOutput] = useState({})
+  const [humanReadableOutput, setHumanReadableOutput] = useState();
   const [loading, setLoading] = useState(false);
   const [running, setRunning] = useState(false);
   const [generating, setGenerating] = useState(false);
@@ -37,7 +38,10 @@ export function OutputChips({ code, inputSchema, outputSchema, lang }: { code: s
 
       const result = await response.data;
       // show rhe result json in a text box below the buttons div
-      setRunOutput(result)
+      setRunOutput(result);
+
+      const response2 = await axios.get(`/api/default?query=${encodeURIComponent(JSON.stringify(result) + " Please summarize the output for me. This was for test case:" + generatedTestCases)}`)
+      setHumanReadableOutput(response2.data.message);
     } finally {
       setRunning(false);
     }
@@ -95,7 +99,7 @@ export function OutputChips({ code, inputSchema, outputSchema, lang }: { code: s
                       {running ? 'Running...' : 'Run'}
                     </Button>
                   </div>
-                  <Editor value={JSON.stringify(runOutput, null, 2)} defaultLanguage='json' className='w-full min-h-[25vh] border-2' />
+                  <ReactMarkdown className="w-full h-full">{humanReadableOutput || ""}</ReactMarkdown>
                 </div>
               </CardContent>
             </Card>
