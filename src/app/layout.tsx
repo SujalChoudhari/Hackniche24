@@ -10,9 +10,8 @@ import { FaBagShopping, FaChair, FaDollarSign, FaFlag, FaLock, FaTable, FaUserGr
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  // manifest: "./manifest.json",
-  title: "VersionX",
-  description: "",
+  title: "VersionByte",
+  description: "The only application to make your prototypes",
 };
 
 const navItems = [
@@ -48,7 +47,7 @@ export default function RootLayout({
 
     <html lang="en" className="">
       <body className={inter.className}>
-      <FloatingNav navItems={navItems} />
+        <FloatingNav navItems={navItems} />
         <Toaster />
         <AuthContextProvider>
           {children}
