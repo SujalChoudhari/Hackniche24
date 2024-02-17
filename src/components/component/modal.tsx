@@ -75,7 +75,7 @@ const Modal = ({
                         <div className="flex justify-end mt-4">
                             <Link href="/dashboard">
                                 <DialogPrimitive.Close className="absolute right-12 bottom-9   focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-                                    <Button onClick={handleGenerateClick}>Generate</Button>
+                                    <Button className="bg-black text-white" onClick={handleGenerateClick}>Generate</Button>
                                     <span className="sr-only">Close</span>
                                 </DialogPrimitive.Close>
                             </Link>
