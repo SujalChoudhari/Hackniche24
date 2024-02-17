@@ -17,6 +17,7 @@ import axios from "axios";
 import PocketBase from 'pocketbase';
 import { useAuth } from "@/context/AuthContext";
 import { Editor } from "@monaco-editor/react";
+import Modal from "@/components/component/modal";
 
 export default function Dashboard() {
 
@@ -60,6 +61,8 @@ export default function Dashboard() {
 
 
   return (
+    <>
+    <Modal/>
     <ResizablePanelGroup
       direction="horizontal"
       className="w-full rounded-lg border"
@@ -111,5 +114,6 @@ export default function Dashboard() {
         </ResizablePanelGroup>
       </ResizablePanel>
     </ResizablePanelGroup>
+    </> 
   )
 }
