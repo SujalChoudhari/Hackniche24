@@ -9,6 +9,11 @@
 # testing
 /coverage
 
+# sw
+sw.*
+sw*.js
+workbox*
+
 # next.js
 /.next/
 /out/

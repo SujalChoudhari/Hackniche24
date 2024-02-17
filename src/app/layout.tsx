@@ -10,6 +10,7 @@ import { FaBagShopping, FaChair, FaDollarSign, FaFlag, FaLock, FaTable, FaUserGr
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  manifest: "/manifest.json",
   title: "VersionByte",
   description: "The only application to make your prototypes",
 };
