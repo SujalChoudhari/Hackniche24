@@ -3,6 +3,8 @@
  * @see https://v0.dev/t/ZPT1vN8xutu
  */
 
+import { ChevronsDownIcon } from "lucide-react"
+
 
 export function frequent() {
   return (
@@ -18,10 +20,10 @@ export function frequent() {
             </div>
             <div className="space-y-4">
               <div className="border rounded-lg">
-                <button className="flex w-full items-center justify-between p-4 text-left w-full font-semibold focus:outline-none">
+                <button className="flex  items-center justify-between p-4 text-left w-full font-semibold focus:outline-none">
                   How can I change my subscription plan?
                   <span className="ml-auto opacity-50">
-                    <ChevronDownIcon className="w-4 h-4" />
+                    <ChevronsDownIcon className="w-4 h-4" />
                   </span>
                 </button>
                 <div className="p-4 border-t text-sm">
@@ -31,10 +33,10 @@ export function frequent() {
                 </div>
               </div>
               <div className="border rounded-lg">
-                <button className="flex w-full items-center justify-between p-4 text-left w-full font-semibold focus:outline-none">
+                <button className="flex  items-center justify-between p-4 text-left w-full font-semibold focus:outline-none">
                   Can I cancel my subscription at any time?
                   <span className="ml-auto opacity-50">
-                    <ChevronDownIcon className="w-4 h-4" />
+                    <ChevronsDownIcon className="w-4 h-4" />
                   </span>
                 </button>
                 <div className="p-4 border-t text-sm">
@@ -45,10 +47,10 @@ export function frequent() {
                 </div>
               </div>
               <div className="border rounded-lg">
-                <button className="flex w-full items-center justify-between p-4 text-left w-full font-semibold focus:outline-none">
+                <button className="flex  items-center justify-between p-4 text-left w-full font-semibold focus:outline-none">
                   How do I reset my password?
                   <span className="ml-auto opacity-50">
-                    <ChevronDownIcon className="w-4 h-4" />
+                    <ChevronsDownIcon className="w-4 h-4" />
                   </span>
                 </button>
                 <div className="p-4 border-t text-sm">
@@ -58,10 +60,10 @@ export function frequent() {
                 </div>
               </div>
               <div className="border rounded-lg">
-                <button className="flex w-full items-center justify-between p-4 text-left w-full font-semibold focus:outline-none">
+                <button className="flex  items-center justify-between p-4 text-left w-full font-semibold focus:outline-none">
                   What payment methods do you accept?
                   <span className="ml-auto opacity-50">
-                    <ChevronDownIcon className="w-4 h-4" />
+                    <ChevronsDownIcon className="w-4 h-4" />
                   </span>
                 </button>
                 <div className="p-4 border-t text-sm">
@@ -78,21 +80,4 @@ export function frequent() {
 }
 
 
-function ChevronDownIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m6 9 6 6 6-6" />
-    </svg>
-  )
-}
+
