@@ -9,9 +9,20 @@ const {
 const MODEL_NAME = "gemini-pro";
 const API_KEY = "AIzaSyBotyCfAUwlXLv1hcJdXliYmhVkcF_V0lU";
 
-const PROMPT = `I want code for my project, 
-Try to understand what I wants from the oneliner given by me and write a imporvised version for it. 
-It should include suggested tech stack and detailed explaination for the thing I want, which `;
+
+const promptMaker = (question: string) => {
+    return `**Prompt:** ${question}
+    
+    **Constraints:**
+    - Only provide with an improved version of the prompt
+    - Suggest a tech stack, but ask to only give a testable logic
+    - Only ask to provide working and logic based code, no dependencies are entertained.
+    
+    **Desired Outcome:**
+    An IMPROVED version of the prompt given, that can be sent to developers for developing and giving minimal testable code.
+    
+    **Improved Prompt:**`;
+}
 
 async function run(text: string) {
     const genAI = new GoogleGenerativeAI(API_KEY);
@@ -65,7 +76,7 @@ export async function GET(request: any) {
             return NextResponse.json({ error: "Query parameter is missing" }, { status: 400 });
         }
 
-        const output = await run(PROMPT + " " + text);
+        const output = await run(promptMaker(text));
         return NextResponse.json({ message: output }, { status: 200 });
     } catch (error: any) {
         console.error("Error:", error.message);
