@@ -41,13 +41,17 @@ export function VersionControl() {
   ];
 
   return (
-    <div className="h-[100vh] p-2 bg-white">
+    <div className="h-screen p-2 bg-white">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-lg font-semibold">History</h2>
+        <Button className="text-sm" variant="ghost">
+          «
+        </Button>
+
       </div>
       <ScrollArea className="space-y-4">
         {versionData.map((version, index) => (
-          <Card key={index} className=" mt-2">
+          <Card key={index} className="min-w-[300px] mt-2">
             <CardHeader>
               <CardTitle>{version.version}</CardTitle>
             </CardHeader>
@@ -57,11 +61,11 @@ export function VersionControl() {
                 <span className="text-sm">{version.date}</span>
               </div>
               <Avatar className="mt-4">
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
             </CardContent>
-
+            
 
           </Card>
         ))}
