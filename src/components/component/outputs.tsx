@@ -20,7 +20,7 @@ export function OutputChips({ code, inputSchema, outputSchema, lang }: { code: s
     try {
       setGenerating(true);
 
-      const response = await axios.get(`/api/test?code=${code}`);
+      const response = await axios.get(`/api/test?code=${encodeURIComponent(code)}`);
       const data = await response.data;
 
       setGeneratedTestCases(data.code);
@@ -46,7 +46,7 @@ export function OutputChips({ code, inputSchema, outputSchema, lang }: { code: s
   const generateCodeExplanation = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`/api/explain?code=${code}&inputSchema=${inputSchema}&outputSchema=${outputSchema}`);
+      const response = await axios.get(`/api/explain?code=${encodeURIComponent(code)}&inputSchema=${inputSchema}&outputSchema=${outputSchema}`);
       const data = await response.data;
       setCodeExplanation(data.explaination);
     }

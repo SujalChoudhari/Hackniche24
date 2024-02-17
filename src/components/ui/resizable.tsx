@@ -1,6 +1,6 @@
 "use client"
 
-import { GripVertical } from "lucide-react"
+import { DotIcon, GripVertical, HammerIcon, MenuIcon } from "lucide-react"
 import * as ResizablePrimitive from "react-resizable-panels"
 
 import { cn } from "@/lib/utils"
@@ -36,7 +36,7 @@ const ResizableHandle = ({
   >
     {withHandle && (
       <div className="z-10 flex h-8 w-3 items-center justify-center rounded-sm border bg-border">
-        <GripVertical  size={48} className="" />
+        <MenuIcon size={48} className=" bg-gray-200 rounded border-black border w-16 " />
       </div>
     )}
   </ResizablePrimitive.PanelResizeHandle>

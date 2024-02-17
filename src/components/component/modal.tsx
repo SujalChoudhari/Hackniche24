@@ -22,12 +22,13 @@ const Modal = ({
 }) => {
     const handleGenerateClick = () => {
         const prompt = document.getElementById("prompt") as HTMLInputElement;
+        const negetivePrompt = document.getElementById("negative-prompt") as HTMLInputElement;
         const inputSchema = document.getElementById("input-schema") as HTMLInputElement;
         const outputSchema = document.getElementById("output-schema") as HTMLInputElement;
         const dataSources = document.getElementById("data-sources") as HTMLInputElement;
 
         if (prompt && inputSchema && outputSchema && dataSources) {
-            onGeneratePressed(prompt.value, inputSchema.value, outputSchema.value, dataSources.value);
+            onGeneratePressed(prompt.value + " Without the following things: " + negetivePrompt.value, inputSchema.value, outputSchema.value, dataSources.value);
         }
     };
 
