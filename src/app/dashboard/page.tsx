@@ -17,6 +17,7 @@ import Modal from "@/components/component/modal";
 
 
 import { OutputChips } from "@/components/component/outputs";
+import toast from "react-hot-toast";
 
 export default function Dashboard() {
 
@@ -30,6 +31,9 @@ export default function Dashboard() {
 
 
   const onGeneratePressed = async (prompt: string, inputSchema: string, outputSchema: string, dataSources: string) => {
+    toast.success("Generating top quality code.... Be patient", {
+      duration: 5000
+    })
     const pb = new PocketBase('https://itbt.pockethost.io');
     // @ts-ignore
     refinePromptRef.current.value = prompt;
@@ -64,12 +68,14 @@ export default function Dashboard() {
 
     const record = await pb.collection('history').create(data);
     console.log(data, record)
+    toast.success("Generated Code")
   }
 
   const onRefinePressed = async () => {
+    toast.success("Refining the code...")
     const pb = new PocketBase('https://itbt.pockethost.io');
 
-    const URL = `http://localhost:3000/api/refine?code=${code}&changes=${refinePromptRef.current?.value}&inputSchema=${inputSchemaRef.current?.value}&outputSchema=${outputSchemaRef.current?.value}&dataSources=${dataSourcesRef.current?.value}`
+    const URL = `/api/refine?code=${code}&changes=${refinePromptRef.current?.value}&inputSchema=${inputSchemaRef.current?.value}&outputSchema=${outputSchemaRef.current?.value}&dataSources=${dataSourcesRef.current?.value}`
     const respose = await axios.get(URL);
     console.log(respose.data)
     setLang(respose.data.language);
@@ -92,11 +98,14 @@ export default function Dashboard() {
     };
 
     const record = await pb.collection('history').create(data);
+    toast.success("Refinined code successfully")
+
   }
 
   function handleEditorChange(value: any, event: any) {
     setCode(value);
   }
+
   const exportToVSCode = () => {
     const content = code;
     if (content) {
@@ -115,7 +124,7 @@ export default function Dashboard() {
 
   return (
     <>
-    
+
       <Modal onGeneratePressed={onGeneratePressed} />
       <ResizablePanelGroup
         direction="horizontal"
@@ -136,10 +145,10 @@ export default function Dashboard() {
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={80}>
           <div className="">
-          <button onClick={exportToVSCode} className="top-14 z-30  left-10 group relative text-sm inline-flex h-8 w-12 items-center justify-center overflow-hidden rounded-full bg-neutral-950 font-medium  text-neutral-200 transition-all duration-300 hover:w-48"><div className="inline-flex whitespace-nowrap text-sm opacity-0 transition-all duration-200 group-hover:-translate-x-3 group-hover:opacity-100">Export to VS CODE</div><div className="absolute right-3.5"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"><path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg></div></button>
+            <button onClick={exportToVSCode} className="top-14 z-30  left-10 group relative text-sm inline-flex h-8 w-12 items-center justify-center overflow-hidden rounded-full bg-neutral-950 font-medium  text-neutral-200 transition-all duration-300 hover:w-48"><div className="inline-flex whitespace-nowrap text-sm opacity-0 transition-all duration-200 group-hover:-translate-x-3 group-hover:opacity-100">Export to VS CODE</div><div className="absolute right-3.5"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"><path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg></div></button>
             <div className="py-10 pt-20 bg-white ">
-            
-            
+
+
               <Editor
                 height={(70) + 'vh'}
                 defaultLanguage={lang}
@@ -150,7 +159,7 @@ export default function Dashboard() {
                 onChange={handleEditorChange}
               />
             </div>
-            
+
 
             <div className="flex flex-row justify-center items-center space-x-3 mt-5">
               <span className="w-3/4 border-2">

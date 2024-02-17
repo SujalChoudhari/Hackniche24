@@ -7,6 +7,7 @@ import ReactMarkdown from "react-markdown";
 import axios from 'axios';
 import { Editor } from '@monaco-editor/react';
 import { Button } from '../ui/button';
+import toast from 'react-hot-toast';
 export function OutputChips({ code, inputSchema, outputSchema, lang }: { code: string, inputSchema: {}, outputSchema: {}, lang: string }) {
   const [activeTab, setActiveTab] = useState('Test Cases');
   const [codeExplanation, setCodeExplanation] = useState('');
@@ -20,12 +21,13 @@ export function OutputChips({ code, inputSchema, outputSchema, lang }: { code: s
   const handleGenerateTestCase = async () => {
     try {
       setGenerating(true);
-
+      toast.success("Generating TestCase")
       const response = await axios.get(`/api/test?code=${encodeURIComponent(code)}`);
       const data = await response.data;
 
       setGeneratedTestCases(data.code);
     } finally {
+      toast.success("Generated TestCase")
       setGenerating(false);
     }
   };
@@ -33,22 +35,25 @@ export function OutputChips({ code, inputSchema, outputSchema, lang }: { code: s
   const handleRunTestCase = async () => {
     try {
       setRunning(true);
-
+      toast.success("Running Tests")
       const response = await axios.get(`/api/run?code=${encodeURIComponent(generatedTestCases)}&language=${lang || "python"}`);
 
       const result = await response.data;
       // show rhe result json in a text box below the buttons div
       setRunOutput(result);
+      toast.success("Got results, Making it Human readable...")
 
       const response2 = await axios.get(`/api/default?query=${encodeURIComponent(JSON.stringify(result) + " Please summarize the output for me. This was for test case:" + generatedTestCases)}`)
       setHumanReadableOutput(response2.data.message);
     } finally {
       setRunning(false);
+      toast.success("Ran Succussfully")
     }
   };
 
   const generateCodeExplanation = async () => {
     try {
+      toast.success("Generating Explainations...")
       setLoading(true);
       const response = await axios.get(`/api/explain?code=${encodeURIComponent(code)}&inputSchema=${inputSchema}&outputSchema=${outputSchema}`);
       const data = await response.data;
@@ -56,7 +61,7 @@ export function OutputChips({ code, inputSchema, outputSchema, lang }: { code: s
     }
     finally {
       setLoading(false);
-
+      toast.success("Generated Explainations.")
     }
   };
 
