@@ -9,7 +9,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
@@ -17,6 +17,7 @@ import PocketBase from 'pocketbase';
 import { useAuth } from "@/context/AuthContext";
 import { Editor } from "@monaco-editor/react";
 import Modal from "@/components/component/modal";
+
 import InputOutput from "@/components/component/input-output";
 
 export default function Dashboard() {
@@ -41,7 +42,8 @@ export default function Dashboard() {
     const records = await pb.collection('history').getFullList({
       sort: '-created',
     });
-
+ 
+    
     const data = {
       "userId": auth?.user?.uid,
       "code": respose.data.code,
