@@ -1,7 +1,7 @@
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "../ui/label"
 
-export default function JSON() {
+export default function JSON({ inputRef, outputRef }: { inputRef: any, outputRef: any }) {
     return (
         <>
             <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#bdbdbd_1.5px,transparent_1.5px)] [background-size:16px_16px]"></div>
@@ -13,13 +13,13 @@ export default function JSON() {
                             <Label className="text-sm  justify-center flex mb-3 font-medium" >
                                 Input JSON
                             </Label>
-                            <Textarea className="min-h-32 border-slate-600 " placeholder="Enter input JSON here" />
+                            <Textarea className="min-h-32 border-slate-600 " ref={inputRef} placeholder="Enter input JSON here" />
                         </div>
                         <div>
                             <Label className="text-sm justify-center flex mb-3 font-medium" >
                                 Output JSON
                             </Label>
-                            <Textarea className="min-h-32 border-slate-600 " id="output" placeholder="Output JSON will be displayed here" />
+                            <Textarea className="min-h-32 border-slate-600 " ref={outputRef} id="output" placeholder="Output JSON will be displayed here" />
                         </div>
 
                     </div>

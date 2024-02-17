@@ -4,10 +4,10 @@ import { CardContent, Card } from '@/components/ui/card';
 import { TerminalIcon } from 'lucide-react';
 import ChipTabs from './chips';
 
-export function TestCases() {
+export function TestCases({ dataSourcesRef }: { dataSourcesRef: any }) {
   const [activeTab, setActiveTab] = useState('Test Cases');
 
-  const handleTabClick = (tabName:any) => {
+  const handleTabClick = (tabName: any) => {
     setActiveTab(tabName);
   };
 
@@ -45,38 +45,39 @@ export function TestCases() {
           </div>
         )}
         {activeTab === "Data Sources" && (
-          
-            <CardContent>
-              <div className="flex flex-col space-x-2 items-center">
-                <label className="text-sm font-medium mb-2" htmlFor="dataSource">
-                  Data Sources:
-                </label>
-                <textarea
-                  id="dataSource"
-                  className="border-gray-300 border p-2 flex-grow"
-                  rows={4}
-                  placeholder="Enter data sources here..."
-                ></textarea>
-              </div>
-            </CardContent>
-         
+
+          <CardContent>
+            <div className="flex flex-col space-x-2 items-center">
+              <label className="text-sm font-medium mb-2" htmlFor="dataSource">
+                Data Sources:
+              </label>
+              <textarea
+                ref={dataSourcesRef}
+                id="dataSource"
+                className="border-gray-300 border p-2 flex-grow"
+                rows={4}
+                placeholder="Enter data sources here..."
+              ></textarea>
+            </div>
+          </CardContent>
+
         )}
         {activeTab === "Code Explanation" && (
-          
-            <CardContent>
-              <div className="flex flex-col space-x-2 items-center ">
-                <label className="text-sm font-medium mb-2" htmlFor="codeExplanation">
-                  Code Explanation:
-                </label>
-                <textarea
-                  id="codeExplanation"
-                  className="border-gray-300 border p-2 flex-grow"
-                  rows={4}
-                  placeholder="Enter code explanation here..."
-                ></textarea>
-              </div>
-            </CardContent>
-          
+
+          <CardContent>
+            <div className="flex flex-col space-x-2 items-center ">
+              <label className="text-sm font-medium mb-2" htmlFor="codeExplanation">
+                Code Explanation:
+              </label>
+              <textarea
+                id="codeExplanation"
+                className="border-gray-300 border p-2 flex-grow"
+                rows={4}
+                placeholder="Enter code explanation here..."
+              ></textarea>
+            </div>
+          </CardContent>
+
         )}
         <div className="flex justify-between items-center">
           <div className="text-sm">Performance: 123ms</div>

@@ -6,7 +6,6 @@ import {
     onAuthStateChanged,
     signOut,
     signInWithPopup,
-    signInWithRedirect,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     UserCredential,
@@ -14,7 +13,6 @@ import {
     GithubAuthProvider
 } from "firebase/auth";
 import { auth, db } from "@/firebase"
-import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
 
 interface AuthContextProps {
@@ -41,11 +39,6 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
             const result: UserCredential = await signInWithPopup(auth, provider);
             setUser(result.user);
 
-            const userDocRef = doc(db, 'users', result.user.uid)
-            const userDoc = getDoc(userDocRef);
-            if (!(await userDoc).exists()) {
-                await setDoc(userDocRef, { name: result.user.displayName, likes: [], orders: [] },)
-            }
 
             toast.success(`Logged in as ${result.user.email}`)
         } catch (error) {
@@ -60,12 +53,6 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
             const result: UserCredential = await signInWithPopup(auth, provider);
             setUser(result.user);
 
-            const userDocRef = doc(db, 'users', result.user.uid)
-            const userDoc = getDoc(userDocRef);
-            if (!(await userDoc).exists()) {
-                await setDoc(userDocRef, { name: result.user.displayName },)
-            }
-
             toast.success(`Logged in as ${result.user.email}`)
         } catch (error) {
             console.error('Authentication error:', error);
@@ -76,12 +63,7 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
     const signUpWithEmailPassword = async (name: string, email: string, password: string) => {
         const result = await createUserWithEmailAndPassword(auth, email, password);
         setUser(result.user)
-        const userDocRef = doc(db, 'users', result.user.uid)
 
-        const userDoc = getDoc(userDocRef);
-        if (!(await userDoc).exists()) {
-            await setDoc(userDocRef, { name: name, likes: [], orders: [] },)
-        }
 
         toast.success(`Signed up as ${result.user.email}`)
     }

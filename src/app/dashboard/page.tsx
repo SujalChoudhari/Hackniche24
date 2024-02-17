@@ -13,13 +13,44 @@ import {
 import { useRef, useState } from "react"
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
+import PocketBase from 'pocketbase';
+import { useAuth } from "@/context/AuthContext";
 
 export default function Dashboard() {
 
   const [lang, setLang] = useState("javascript");
   const [code, setCode] = useState("");
+  const auth = useAuth();
+  const refinePromptRef = useRef<HTMLInputElement | null>(null);
+  const inputSchemaRef = useRef<HTMLInputElement | null>(null);
+  const outputSchemaRef = useRef<HTMLInputElement | null>(null);
+  const dataSourcesRef = useRef<HTMLInputElement | null>(null);
 
-  const refinePrompt = useRef<string>("");
+  const onRefinePressed = async () => {
+    const pb = new PocketBase('https://itbt.pockethost.io');
+
+    const URL = `http://localhost:3000/api/refine?code=${code}&changes=${refinePromptRef.current?.value}&inputSchema=${inputSchemaRef.current?.value}&outputSchema=${outputSchemaRef.current?.value}&dataSources=${dataSourcesRef.current?.value}`
+    const respose = await axios.get(URL);
+
+    setLang(respose.data.language);
+    setCode(respose.data.code)
+
+    const records = await pb.collection('history').getFullList({
+      sort: '-created',
+    });
+
+    const data = {
+      "userId": auth?.user?.uid,
+      "code": code,
+      "prompt": refinePromptRef.current?.value,
+      "revNo": records.length,
+      "schema": { input: inputSchemaRef.current?.value, output: outputSchemaRef.current?.value },
+      "language": lang
+    };
+
+    const record = await pb.collection('history').create(data);
+  }
 
   return (
     <ResizablePanelGroup
@@ -28,10 +59,7 @@ export default function Dashboard() {
     >
       <ResizablePanel defaultSize={25} maxSize={25} minSize={20}>
         <div className=" h-full border-2 ">
-
           <VersionControl />
-
-
         </div>
       </ResizablePanel>
       <ResizableHandle withHandle />
@@ -48,27 +76,27 @@ export default function Dashboard() {
 
           <div className="flex flex-row justify-center items-center space-x-3 mt-5">
             <span className="w-3/4 border-2">
-              <Input className="  rounded-lg bg-white text-lg caret-purple-500  " /> </span>
-            <button className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-xl bg-neutral-950 px-6 font-medium text-neutral-200 transition hover:scale-110"><span>Refine</span>
-              <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]"><div className="relative h-full w-8 bg-white/20"></div></div></button>
+              <Input ref={refinePromptRef} className="  rounded-lg bg-white text-lg caret-purple-500  " /> </span>
+            <Button onClick={onRefinePressed} className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-xl bg-neutral-950 px-6 font-medium text-neutral-200 transition hover:scale-110"><span>Refine</span>
+              <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]"><div className="relative h-full w-8 bg-white/20">
+              </div>
+              </div>
+            </Button>
           </div>
         </div>
 
 
       </ResizablePanel>
-
-
-
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={35} minSize={25} maxSize={45} className="">
 
         <ResizablePanelGroup direction="vertical" className="border ">
           <ResizablePanel defaultSize={20} minSize={20} className="">
-            <JSON />
+            <JSON inputRef={inputSchemaRef} outputRef={outputSchemaRef} />
           </ResizablePanel>
           <ResizableHandle withHandle className="border  " />
           <ResizablePanel defaultSize={20} minSize={40} className="">
-            <TestCases />
+            <TestCases dataSourcesRef={dataSourcesRef} />
           </ResizablePanel>
         </ResizablePanelGroup>
       </ResizablePanel>

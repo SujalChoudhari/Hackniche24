@@ -20,6 +20,7 @@
     "@splinetool/react-spline": "^2.2.6",
     "@splinetool/runtime": "^1.0.53",
     "@tabler/icons-react": "^2.47.0",
+    "axios": "^1.6.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "firebase": "^10.8.0",

@@ -84,11 +84,14 @@ export async function GET(request: any) {
         const outputSchema = request.nextUrl.searchParams.get("outputSchema");
         const dataSources = request.nextUrl.searchParams.get("dataSources");
         // Handle the case where 'query' parameter is missing
-        return NextResponse.json({ error: "Query parameter is missing" }, { status: 400 });
+        // return NextResponse.json({ error: "Query parameter is missing" }, { status: 400 });
 
-
+        console.log(code, changes, inputSchema, outputSchema, dataSources)
         const output = await run(promptMaker(code, changes, inputSchema, outputSchema, dataSources));
-        return NextResponse.json({ message: output }, { status: 200 });
+        
+        var genCode = ""
+        var genLang = ""
+        return NextResponse.json({ code: genCode, language: genLang }, { status: 200 });
     } catch (error: any) {
         console.error("Error:", error.message);
         // Return an error response if there's an issue
