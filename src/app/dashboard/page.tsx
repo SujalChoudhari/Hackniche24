@@ -3,6 +3,8 @@ import JSON from "@/components/component/input-output"
 import { TestCases } from "@/components/component/test-cases"
 import { VersionControl } from "@/components/component/version-control"
 import { CodeEditor } from "@/components/editor"
+import { LiveSync } from "@/components/livesync";
+import { OtherMouse } from "@/components/othermouse";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -28,6 +30,7 @@ export default function Dashboard() {
         <div className=" h-full border-2 ">
 
           <VersionControl />
+
 
         </div>
       </ResizablePanel>

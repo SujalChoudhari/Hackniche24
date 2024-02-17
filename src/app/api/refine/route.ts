@@ -87,7 +87,7 @@ export async function GET(request: any) {
         return NextResponse.json({ error: "Query parameter is missing" }, { status: 400 });
 
 
-        const output = await run(promptMaker(text));
+        const output = await run(promptMaker(code, changes, inputSchema, outputSchema, dataSources));
         return NextResponse.json({ message: output }, { status: 200 });
     } catch (error: any) {
         console.error("Error:", error.message);
