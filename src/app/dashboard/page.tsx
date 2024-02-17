@@ -14,7 +14,7 @@ export default function ResizableDemo() {
       className="min-h-[200px] w-full rounded-lg border"
     >
       <ResizablePanel defaultSize={25} className=" min-w-[200px]">
-        <div className="flex h-full items-center justify-center p-6 border-2 border-purple-500 border-dashed">
+        <div className="flex h-full items-center justify-center p-6 border-2 ">
           
           <VersionControl/>
           

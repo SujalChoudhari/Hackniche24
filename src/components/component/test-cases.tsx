@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { CardContent, Card } from '@/components/ui/card';
 import { TerminalIcon } from 'lucide-react';
+import ChipTabs from './chips';
 
 
 export function TestCases() {
@@ -31,30 +32,12 @@ export function TestCases() {
       <div className="flex flex-col space-y-4">
         <Tabs>
           <div className="flex space-x-2">
-            <Button
-              variant={activeTab === 'case1' ? 'destructive' : 'outline'}
-              onClick={() => handleTabClick('case1')}
-            >
-              Case 1
-            </Button>
-            <Button
-              variant={activeTab === 'case2' ? 'destructive' : 'outline'}
-              onClick={() => handleTabClick('case2')}
-            >
-              Case 2
-            </Button>
-            <Button
-              variant={activeTab === 'case3' ? 'destructive' : 'outline'}
-              onClick={() => handleTabClick('case3')}
-            >
-              Case 3
-            </Button>
-            <Button variant="outline">+</Button>
+          <ChipTabs/>
           </div>
         </Tabs>
-        <Card className="">
+        <Card className="rounded-lg">
           <CardContent>
-            <div className="flex flex-row space-x-2 items-center mt-6">
+            <div className="flex flex-row space-x-2 items-center  mt-6">
               <label className="text-sm font-medium" htmlFor="test2">
                 Test 1 =
               </label>
@@ -62,7 +45,7 @@ export function TestCases() {
             </div>
           </CardContent>
         </Card>
-        <Card className="">
+        <Card className="rounded-lg">
           <CardContent>
             <div className="flex flex-row space-x-2 items-center mt-6">
               <label className="text-sm font-medium" htmlFor="test2">
@@ -74,7 +57,8 @@ export function TestCases() {
         </Card>
         <div className="flex justify-between items-center">
           <div className="text-sm">Performance: 123ms</div>
-          <Button>Run</Button>
+          <Button variant="outline">Button</Button>
+
         </div>
       </div>
       <div className="mt-6">
