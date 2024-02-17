@@ -45,10 +45,10 @@ export function TestCases() {
           </div>
         )}
         {activeTab === "Data Sources" && (
-          <Card className="rounded-lg">
+          
             <CardContent>
-              <div className="flex flex-row space-x-2 items-center mt-6">
-                <label className="text-sm font-medium" htmlFor="dataSource">
+              <div className="flex flex-col space-x-2 items-center">
+                <label className="text-sm font-medium mb-2" htmlFor="dataSource">
                   Data Sources:
                 </label>
                 <textarea
@@ -59,13 +59,13 @@ export function TestCases() {
                 ></textarea>
               </div>
             </CardContent>
-          </Card>
+         
         )}
         {activeTab === "Code Explanation" && (
-          <Card className="rounded-lg">
+          
             <CardContent>
-              <div className="flex flex-row space-x-2 items-center mt-6">
-                <label className="text-sm font-medium" htmlFor="codeExplanation">
+              <div className="flex flex-col space-x-2 items-center ">
+                <label className="text-sm font-medium mb-2" htmlFor="codeExplanation">
                   Code Explanation:
                 </label>
                 <textarea
@@ -76,7 +76,7 @@ export function TestCases() {
                 ></textarea>
               </div>
             </CardContent>
-          </Card>
+          
         )}
         <div className="flex justify-between items-center">
           <div className="text-sm">Performance: 123ms</div>
