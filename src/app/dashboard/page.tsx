@@ -106,10 +106,10 @@ export default function Dashboard() {
       a.setAttribute("style", "display: none");
       const url = window.URL.createObjectURL(blob);
       a.href = url;
-      a.download = "exported_code";
+      a.download = "exported_code.py";
       a.click();
       document.body.removeChild(a);
-      window.open("vscode://file/exported_code");
+      window.open("vscode://file/C:/Users/91705/Downloads/exported_code.py");
     }
   };
 
