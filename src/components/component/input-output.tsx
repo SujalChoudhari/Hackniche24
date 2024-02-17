@@ -1,7 +1,7 @@
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "../ui/label"
 
-export default function JSON({ inputRef, outputRef }: { inputRef: any, outputRef: any }) {
+export default function InputOutput({ inputRef, outputRef }: { inputRef: any, outputRef: any }) {
     return (
         <>
         <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#bdbdbd_1.5px,transparent_1.5px)] [background-size:16px_16px]"></div>

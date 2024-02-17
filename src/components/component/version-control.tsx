@@ -7,20 +7,51 @@ import { useAuth } from "@/context/AuthContext";
 import PocketBase from 'pocketbase';
 import { formatDistanceToNowStrict } from "date-fns"
 
-export function VersionControl() {
+export function VersionControl({
+  setCode,
+  setLang,
+  inputRef,
+  outputRef,
+  dataSources,
+  prompt
+}: {
+  setCode: any,
+  setLang: any,
+  inputRef: any,
+  outputRef: any,
+  dataSources: any,
+  prompt: any
+}) {
   const pb = new PocketBase('https://itbt.pockethost.io');
-  const [versionData, setVersionData] = useState<any>([])
-  const auth = useAuth()
+  const [versionData, setVersionData] = useState<any>([]);
+  const [loading, setLoading] = useState(true);
+  const auth = useAuth();
+
   useEffect(() => {
     async function getHistory() {
-      const resultList = await pb.collection('history').getList(1, 7, {
-      });
-      console.log(resultList)
-      setVersionData(resultList.items);
+      try {
+        setLoading(true);
+        const resultList = await pb.collection('history').getList(1, 7, {});
+        setVersionData(resultList.items.reverse());
+      } catch (e) {
+        console.log(e)
+      }
+      finally {
+        setLoading(false);
+      }
     }
 
     getHistory();
-  }, [auth])
+  }, [auth]);
+
+  async function handleOnVersionChoose(version: any) {
+    console.log(version)
+    setCode(version.code);
+    setLang(version.language)
+    prompt.current.value = version.prompt
+    inputRef.current.value = version.schema.input;
+    outputRef.current.value = version.schema.output;
+  }
 
   return (
     <div className="h-screen p-2 bg-white">
@@ -29,29 +60,37 @@ export function VersionControl() {
         <Button className="text-sm" variant="ghost">
           «
         </Button>
-
       </div>
-      <ScrollArea className="space-y-4">
-        {versionData && versionData.map((version: any) => (
-          <Card key={version.revNo} className="min-w-[300px] mt-2">
-            <CardHeader>
-              <CardTitle>v{version.revNo}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex justify-between">
-                <span className="text-sm">{version.prompt}</span>
-                <span className="text-sm">{formatDistanceToNowStrict(new Date(version.created))}</span>
-              </div>
-              <Avatar className="mt-4">
-                <AvatarImage src={version.pfp} />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            </CardContent>
+      {loading ? (
+        <div className="text-center">Loading...</div>
+      ) : (
+        <ScrollArea className="space-y-4 h-full">
+          {versionData.map((version: any) => (
+            <Card
+              key={version.revNo}
+              className=" mt-4 bg-gray-100 rounded-md overflow-hidden shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
+              onClick={() => { handleOnVersionChoose(version) }}
+            >
+              <CardHeader className="[background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] text-white">
+                <CardTitle className="font-bold text-lg">Version {version.revNo}</CardTitle>
+              </CardHeader>
+              <CardContent className="p-4">
+                <div className="flex flex-col space-y-2">
+                  <div className="text-sm">{version.prompt.slice(0, 20)} ...</div>
+                  <div className="flex justify-between items-center text-sm">
+                    <span>{formatDistanceToNowStrict(new Date(version.created))} ago</span>
+                    <Avatar className="w-8 h-8">
+                      <AvatarImage src={version.pfp} className="rounded-full" />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
 
-
-          </Card>
-        ))}
-      </ScrollArea>
+        </ScrollArea>
+      )}
     </div>
   );
 }
