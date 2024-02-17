@@ -4,9 +4,39 @@ import piston from "piston-client";
 
 
 async function run(lang: string, code: string) {
-    // https://emkc.org/api/v2/piston/runtimes  
+    // try {
+    //     fetch('https://emkc.org/api/v2/piston/execute', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             language: lang,
+    //             version: version,
+    //             // https://emkc.org/api/v2/piston/runtimes
+    //             files: [
+    //                 {
+    //                     name: 'Main',
+    //                     content: code.toString()
+    //                 }
+    //             ],
+    //             args: [],
+    //             // stdin: inputs
+    //         })
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             return (data);
+    //         }
+    //         );
+
+    // } catch (e: any) {
+    //     return ('Error: ' + e.message);
+    // }
+
     const client = piston({ server: "https://emkc.org" });
     const result = await client.execute(lang, code);
+
     return result;
 }
 

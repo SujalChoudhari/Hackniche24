@@ -12,7 +12,12 @@ export function TestCases() {
   };
 
   return (
+<<<<<<< Updated upstream
     <div className="bg-white p-8 h-full">
+=======
+    <div className="bg-white p-8 ">
+      
+>>>>>>> Stashed changes
       <div className="flex items-center space-x-4 mb-6 min-w-[300px]">
         <TerminalIcon className="text-black" />
       </div>

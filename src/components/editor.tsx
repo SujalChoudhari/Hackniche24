@@ -1,6 +1,6 @@
 "use client"
 import Editor from '@monaco-editor/react';
-
+import { useState } from 'react';
 
 
 export function CodeEditor({ code, setCode, lang = "javascript", setLang }: { code: any, setCode: any, lang: any, setLang: any }) {
@@ -11,7 +11,7 @@ export function CodeEditor({ code, setCode, lang = "javascript", setLang }: { co
 
     return <>
         <Editor
-            height={(70) + 'vh'}
+            height={(90) + 'vh'}
             defaultLanguage={lang}
             theme="light"
             defaultValue={code}
