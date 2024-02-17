@@ -1,6 +1,7 @@
 import JSON from "@/components/component/input-output"
 import { TestCases } from "@/components/component/test-cases"
 import { VersionControl } from "@/components/component/version-control"
+import { CodeEditor } from "@/components/editor"
 import {
   ResizableHandle,
   ResizablePanel,
@@ -24,7 +25,7 @@ export default function ResizableDemo() {
       <ResizablePanel defaultSize={80}>
         <div className="flex h-full items-center justify-center p-6">
           
-          AI GENERATED CODE
+          <CodeEditor/>
           
         </div>
       </ResizablePanel>
