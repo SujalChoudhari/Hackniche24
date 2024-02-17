@@ -22,13 +22,13 @@ const navItems = [
     icon: <IconHome className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
   {
-    name: "Features",
-    link: "/features",
+    name: "Editor",
+    link: "/dashboard",
     icon: <IconUser className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
   {
-    name: "Feedback",
-    link: "/feedback",
+    name: "Form",
+    link: "/input",
     icon: <FaUserGroup className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
   {
@@ -38,7 +38,7 @@ const navItems = [
   },
   {
     name: "Register",
-    link: "/register",
+    link: "/signup",
     icon: <FaFlag className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
 ];
