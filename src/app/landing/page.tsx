@@ -3,9 +3,9 @@ import React from 'react'
 import Spline from '@splinetool/react-spline'
 
 export default function Landing() {
-  return (
+
+   return (
     <main className='flex min-h-screen h-fit flex-col items-center justify-center relative'>
-      
     <header id="home" className="flex flex-col-reverse md:flex-row w-full h-screen max-w-7xl items-center justify-center p-8 relative overflow-x-hidden">
       <div className='w-full h-2/4 md:h-full md:w-2/5 flex flex-col justify-center items-center md:items-start gap-8'>
         <div className='flex flex-col gap-2'>
