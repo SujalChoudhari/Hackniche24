@@ -1,11 +1,19 @@
-"use client"
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useState } from "react";
 
-const tabs = ["Case 1", "Case 2", "Case 3", "Case 4"];
+interface ChipTabsProps {
+  setSelectedTab: Dispatch<SetStateAction<string>>;
+}
 
-const ChipTabs = () => {
+const tabs = ["Test Cases", "Data Sources", "Code Explanation"];
+
+const ChipTabs = ({ setSelectedTab }: ChipTabsProps) => {
   const [selected, setSelected] = useState(tabs[0]);
+
+  const handleTabClick = (tab: string) => {
+    setSelected(tab);
+    setSelectedTab(tab);
+  };
 
   return (
     <div className="flex items-center flex-wrap gap-2">
@@ -13,7 +21,7 @@ const ChipTabs = () => {
         <Chip
           text={tab}
           selected={selected === tab}
-          setSelected={setSelected}
+          onClick={() => handleTabClick(tab)}
           key={tab}
         />
       ))}
@@ -24,22 +32,22 @@ const ChipTabs = () => {
 const Chip = ({
   text,
   selected,
-  setSelected,
+  onClick,
 }: {
   text: string;
   selected: boolean;
-  setSelected: Dispatch<SetStateAction<string>>;
+  onClick: () => void;
 }) => {
   return (
     <button
-      onClick={() => setSelected(text)}
+      onClick={onClick}
       className={`${
         selected
           ? "text-white"
-          : " hover:text-slate-200 hover:bg-slate-700"
-      } text-sm transition-colors px-4 py-2  relative rounded-full`}
+          : "hover:text-slate-200 hover:bg-slate-700"
+      } text-sm transition-colors px-4 py-2 relative rounded-full`}
     >
-      <span className="relative z-10 text-lg">{text}</span>
+      <span className="relative z-10 text-sm">{text}</span>
       {selected && (
         <motion.span
           layoutId="pill-tab"

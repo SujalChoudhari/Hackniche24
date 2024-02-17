@@ -8,10 +8,10 @@ import { Button } from "@/components/ui/button"
 
 export function InputForm() {
   return (
-    <div key="1" className="w-full">
-      <div className="w-full">
+    <div key="1" className="">
+      <div className="">
         <div
-          className="w-full bg-white rounded-md shadow p-6"
+          className=" bg-white rounded-md shadow p-6"
           style={{
             width: "32rem",
           }}
@@ -49,10 +49,8 @@ export function InputForm() {
               <Textarea id="output-schema" placeholder="output schema" />
             </div>
             <div className="flex justify-end mt-4">
-              <Button className="mr-2" variant="outline">
-                Cancel
-              </Button>
-              <Button>Create</Button>
+            
+              <Button >Generate</Button>
             </div>
           </form>
         </div>
