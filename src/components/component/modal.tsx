@@ -1,27 +1,39 @@
-import { Button } from "@/components/ui/button"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
+import { Button } from "@/components/ui/button";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
 import {
     Dialog,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import Link from "next/link"
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import Link from "next/link";
 import dynamic from "next/dynamic";
-import { X } from "lucide-react"
-const DialogClose = DialogPrimitive.Close
+import { X } from "lucide-react";
+const DialogClose = DialogPrimitive.Close;
 
-const Modal = () => {
+const Modal = ({
+    onGeneratePressed,
+}: {
+    onGeneratePressed: (prompt: string, inputSchema: string, outputSchema: string, dataSources: string) => void;
+}) => {
+    const handleGenerateClick = () => {
+        const prompt = document.getElementById("prompt") as HTMLInputElement;
+        const inputSchema = document.getElementById("input-schema") as HTMLInputElement;
+        const outputSchema = document.getElementById("output-schema") as HTMLInputElement;
+        const dataSources = document.getElementById("data-sources") as HTMLInputElement;
+
+        if (prompt && inputSchema && outputSchema && dataSources) {
+            onGeneratePressed(prompt.value, inputSchema.value, outputSchema.value, dataSources.value);
+        }
+    };
+
     return (
-        <Dialog defaultOpen >
-
-            <DialogContent className="min-w-[560px] ">
+        <Dialog defaultOpen>
+            <DialogContent className="min-w-[560px] bg-white">
                 <DialogHeader>
                     <DialogTitle>Let's Get started</DialogTitle>
                     <DialogDescription>
@@ -63,18 +75,16 @@ const Modal = () => {
                         <div className="flex justify-end mt-4">
                             <Link href="/dashboard">
                                 <DialogPrimitive.Close className="absolute right-12 bottom-9   focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-                                    
-                                    <Button>Generate</Button>
+                                    <Button onClick={handleGenerateClick}>Generate</Button>
                                     <span className="sr-only">Close</span>
-                                  
                                 </DialogPrimitive.Close>
-                                
                             </Link>
                         </div>
                     </form>
                 </div>
             </DialogContent>
         </Dialog>
-    )
-}
-export default dynamic(() => Promise.resolve(Modal), { ssr: false })
+    );
+};
+
+export default dynamic(() => Promise.resolve(Modal), { ssr: false });

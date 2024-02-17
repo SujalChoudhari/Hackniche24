@@ -1,9 +1,6 @@
 "use client";
-import { OutputCases} from "@/components/component/inputs"
+import { InputChips } from "@/components/component/inputs"
 import { VersionControl } from "@/components/component/version-control"
-import { CodeEditor } from "@/components/editor"
-import { LiveSync } from "@/components/livesync";
-import { OtherMouse } from "@/components/othermouse";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -19,7 +16,7 @@ import { Editor } from "@monaco-editor/react";
 import Modal from "@/components/component/modal";
 
 
-import { InputCases } from "@/components/component/outputs";
+import { OutputChips } from "@/components/component/outputs";
 
 export default function Dashboard() {
 
@@ -30,6 +27,44 @@ export default function Dashboard() {
   const inputSchemaRef = useRef<HTMLInputElement | null>(null);
   const outputSchemaRef = useRef<HTMLInputElement | null>(null);
   const dataSourcesRef = useRef<HTMLInputElement | null>(null);
+
+
+  const onGeneratePressed = async (prompt: string, inputSchema: string, outputSchema: string, dataSources: string) => {
+    const pb = new PocketBase('https://itbt.pockethost.io');
+    // @ts-ignore
+    refinePromptRef.current.value = prompt;
+    // @ts-ignore
+    inputSchemaRef.current.value = inputSchema;
+    // @ts-ignore
+    outputSchemaRef.current.value = outputSchema;
+    // @ts-ignore
+    dataSourcesRef.current.value = dataSources;
+
+    const URL = `http://localhost:3000/api/code?changes=${prompt}&inputSchema=${inputSchema}&outputSchema=${outputSchema}&dataSources=${dataSources}`
+    const respose = await axios.get(URL);
+    console.log(respose.data)
+    setLang(respose.data.language);
+    setCode(code => respose.data.code)
+
+    const records = await pb.collection('history').getFullList({
+      sort: '-created',
+    });
+
+
+    const data = {
+      "userId": auth?.user?.uid,
+      "code": respose.data.code,
+      "prompt": prompt,
+      "pfp": auth?.user?.photoURL,
+      "revNo": records.length,
+      "schema": { input: inputSchema, output: outputSchema },
+      "language": lang,
+      "dataSources": dataSources
+    };
+
+    const record = await pb.collection('history').create(data);
+    console.log(data, record)
+  }
 
   const onRefinePressed = async () => {
     const pb = new PocketBase('https://itbt.pockethost.io');
@@ -43,8 +78,8 @@ export default function Dashboard() {
     const records = await pb.collection('history').getFullList({
       sort: '-created',
     });
- 
-    
+
+
     const data = {
       "userId": auth?.user?.uid,
       "code": respose.data.code,
@@ -52,7 +87,8 @@ export default function Dashboard() {
       "pfp": auth?.user?.photoURL,
       "revNo": records.length,
       "schema": { input: inputSchemaRef.current?.value, output: outputSchemaRef.current?.value },
-      "language": lang
+      "language": lang,
+      "dataSources": dataSourcesRef.current?.value
     };
 
     const record = await pb.collection('history').create(data);
@@ -65,7 +101,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <Modal />
+      <Modal onGeneratePressed={onGeneratePressed} />
       <ResizablePanelGroup
         direction="horizontal"
         className="w-full rounded-lg border"
@@ -115,11 +151,11 @@ export default function Dashboard() {
 
           <ResizablePanelGroup direction="vertical" className="border ">
             <ResizablePanel defaultSize={20} minSize={20} className="">
-              <InputCases  />
+              <OutputChips />
             </ResizablePanel>
             <ResizableHandle withHandle className="border  " />
             <ResizablePanel defaultSize={20} minSize={40} className="">
-              <OutputCases inputRef={inputSchemaRef} outputRef={outputSchemaRef} dataSourcesRef={dataSourcesRef} />
+              <InputChips inputRef={inputSchemaRef} outputRef={outputSchemaRef} dataSourcesRef={dataSourcesRef} />
             </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>

@@ -7,12 +7,8 @@ import ChipTabs1 from './chips1';
 import { Label } from '../ui/label';
 import { Textarea } from '../ui/textarea';
 
-export function OutputCases({ inputRef, outputRef, dataSourcesRef }: { inputRef: any, outputRef: any, dataSourcesRef: any }) {
+export function InputChips({ inputRef, outputRef, dataSourcesRef }: { inputRef: any, outputRef: any, dataSourcesRef: any }) {
   const [activeTab, setActiveTab] = useState('Data Sources');
-
-  const handleTabClick = (tabName: any) => {
-    setActiveTab(tabName);
-  };
 
   return (
     <div className='overflow-y-auto h-full'>

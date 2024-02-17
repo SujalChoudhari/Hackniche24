@@ -1,16 +1,12 @@
 "use client"
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
 import { CardContent, Card } from '@/components/ui/card';
 import { TerminalIcon } from 'lucide-react';
 import ChipTabs from './chips';
 
-export function InputCases({ }: {  }) {
+export function OutputChips() {
   const [activeTab, setActiveTab] = useState('Test Cases');
 
-  const handleTabClick = (tabName: any) => {
-    setActiveTab(tabName);
-  };
 
   return (
     <div className="bg-white p-8 h-full ">
@@ -26,49 +22,49 @@ export function InputCases({ }: {  }) {
         {activeTab === "Test Cases" && (
 
 
-      <div>
-        <Card className="rounded-lg">
-          <CardContent>
-            <div className="flex flex-row space-x-2 items-center mt-6">
-              <label className="text-sm font-medium" htmlFor="test1">
-                Test 1 =
-              </label>
-              <div className="text-gray-700 dark:text-gray-300">Static Test Data 1</div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="rounded-lg">
-          <CardContent>
-            <div className="flex flex-row space-x-2 items-center mt-6">
-              <label className="text-sm font-medium" htmlFor="test2">
-                Test 2 =
-              </label>
-              <div className="text-gray-700 dark:text-gray-300">Static Test Data 2</div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+          <div>
+            <Card className="rounded-lg">
+              <CardContent>
+                <div className="flex flex-row space-x-2 items-center mt-6">
+                  <label className="text-sm font-medium" htmlFor="test1">
+                    Test 1 =
+                  </label>
+                  <div className="text-gray-700 dark:text-gray-300">Static Test Data 1</div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="rounded-lg">
+              <CardContent>
+                <div className="flex flex-row space-x-2 items-center mt-6">
+                  <label className="text-sm font-medium" htmlFor="test2">
+                    Test 2 =
+                  </label>
+                  <div className="text-gray-700 dark:text-gray-300">Static Test Data 2</div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
         )}
-      {activeTab === "Code Explanation" && (
+        {activeTab === "Code Explanation" && (
 
-        <CardContent>
-          <div className="flex flex-col space-x-2 items-center ">
-            <label className="text-sm font-medium mb-2" htmlFor="codeExplanation">
-              Code Explanation:
-            </label>
-            <textarea
-              id="codeExplanation"
-              className="border-gray-300 border p-2 flex-grow"
-              rows={4}
-              placeholder="Enter code explanation here..."
-            ></textarea>
-          </div>
-        </CardContent>
+          <CardContent>
+            <div className="flex flex-col space-x-2 items-center ">
+              <label className="text-sm font-medium mb-2" htmlFor="codeExplanation">
+                Code Explanation:
+              </label>
+              <textarea
+                id="codeExplanation"
+                className="border-gray-300 border p-2 flex-grow"
+                rows={4}
+                placeholder="Enter code explanation here..."
+              ></textarea>
+            </div>
+          </CardContent>
 
-      )}
-      
-    </div>
+        )}
+
+      </div>
     </div >
   );
 }
