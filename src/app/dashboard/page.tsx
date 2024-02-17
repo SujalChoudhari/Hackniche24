@@ -45,6 +45,7 @@ export default function Dashboard() {
       "userId": auth?.user?.uid,
       "code": code,
       "prompt": refinePromptRef.current?.value,
+      "pfp": auth?.user?.photoURL,
       "revNo": records.length,
       "schema": { input: inputSchemaRef.current?.value, output: outputSchemaRef.current?.value },
       "language": lang

@@ -83,8 +83,7 @@ export async function GET(request: any) {
         const inputSchema = request.nextUrl.searchParams.get("inputSchema");
         const outputSchema = request.nextUrl.searchParams.get("outputSchema");
         const dataSources = request.nextUrl.searchParams.get("dataSources");
-        // Handle the case where 'query' parameter is missing
-        // return NextResponse.json({ error: "Query parameter is missing" }, { status: 400 });
+
 
         console.log(code, changes, inputSchema, outputSchema, dataSources)
         var output: string = await run(promptMaker(code, changes, inputSchema, outputSchema, dataSources));
