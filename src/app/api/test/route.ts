@@ -17,6 +17,7 @@ const promptMaker = (code: string,) => {
     **Constraints:**
     - Remove all dependency
     - Keep only the logic
+    - Code running environment has all the major languges, you can use them
     - Only provide the code, no Explaination or Outputs Expected
     - Write code that only tests logic, create temp variables if needed
     - If possible add time logic and print the execution time

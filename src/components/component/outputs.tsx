@@ -6,6 +6,7 @@ import ChipTabs from './chips';
 import ReactMarkdown from "react-markdown";
 import axios from 'axios';
 import { Editor } from '@monaco-editor/react';
+import { Button } from '../ui/button';
 export function OutputChips({ code, inputSchema, outputSchema, lang }: { code: string, inputSchema: {}, outputSchema: {}, lang: string }) {
   const [activeTab, setActiveTab] = useState('Test Cases');
   const [codeExplanation, setCodeExplanation] = useState('');
@@ -76,25 +77,25 @@ export function OutputChips({ code, inputSchema, outputSchema, lang }: { code: s
                   <label className="text-sm font-medium mb-2" htmlFor="codeExplanation">
                     Generate Test Case:
                   </label>
-                  <Editor className='min-h-[25vh]' value={generatedTestCases} />
+                  <Editor className='min-h-[25vh] border-2' value={generatedTestCases} />
 
-                  <div className='flex gap-4'>
-                    <button
+                  <div className='flex gap-4 mt-4 mb-4'>
+                    <Button
                       onClick={handleGenerateTestCase}
-                      className="bg-blue-500 text-white px-4 py-2 cursor-pointer rounded mt-4"
+                      className="bg-blue-500 text-white px-4 py-2 cursor-pointer rounded mt-4 bg-gradient-to-r from-violet-600 to-indigo-600"
                       disabled={generating}
                     >
                       {generating ? 'Generating...' : 'Generate'}
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                       onClick={handleRunTestCase}
-                      className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer mt-4"
+                      className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer mt-4 bg-gradient-to-r from-violet-600 to-indigo-600"
                       disabled={generatedTestCases.length < 1 || running}
                     >
                       {running ? 'Running...' : 'Run'}
-                    </button>
+                    </Button>
                   </div>
-                  <Editor value={JSON.stringify(runOutput, null, 2)} defaultLanguage='json' className='w-full min-h-[25vh]' />
+                  <Editor value={JSON.stringify(runOutput, null, 2)} defaultLanguage='json' className='w-full min-h-[25vh] border-2' />
                 </div>
               </CardContent>
             </Card>
@@ -115,7 +116,7 @@ export function OutputChips({ code, inputSchema, outputSchema, lang }: { code: s
                     {codeExplanation}
                   </ReactMarkdown>
                   <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
+                    className=" text-white px-4 py-2 rounded mt-4 bg-gradient-to-r from-violet-600 to-indigo-600"
                     onClick={generateCodeExplanation}
                     disabled={loading}
                   >

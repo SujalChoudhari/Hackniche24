@@ -79,7 +79,7 @@ export async function GET(request: any) {
         console.log(code, inputSchema, outputSchema)
         var output: string = await run(promptMaker(code, inputSchema, outputSchema));
 
-        return NextResponse.json({ explaination:output }, { status: 200 });
+        return NextResponse.json({ explaination: output }, { status: 200 });
     } catch (error: any) {
         console.error("Error:", error.message);
         // Return an error response if there's an issue
