@@ -54,12 +54,7 @@ export function OutputCases({ inputRef, outputRef, dataSourcesRef }: { inputRef:
                 <Textarea className="min-h-32" ref={outputRef} id="output" placeholder="Output JSON will be displayed here" />
               </div>
             )}
-            <div className="flex justify-between items-center">
-              <div className="text-sm">Performance: 123ms</div>
-              <Button className="group h-10 rounded-xl bg-gradient-to-b from-zinc-800 via-zinc-700 to-zinc-600 px-5 text-sm leading-8 text-zinc-50 shadow-[0_-1px_0_1px_rgba(0,0,0,0.8)_inset,0_0_0_1px_rgb(9_9_11)_inset,0_0.5px_0_1.5px_#71717a_inset] hover:bg-gradient-to-b hover:from-zinc-900 hover:via-zinc-900 hover:to-zinc-700 active:shadow-[0_3px_0_0_rgba(0,0,0)_inset]">
-                <span className="block group-active:[transform:translate3d(0,1px,0)]">Run</span>
-              </Button>
-            </div>
+            
           </div>
         </div>
       </CardContent>
