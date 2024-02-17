@@ -18,12 +18,12 @@ export default function Patientloginin() {
 
     const handleGoogleSignIn = async () => {
         await auth?.googleSignIn();
-        router.push("/home")
+        router.push("/dashboard")
     }
 
     const handleGithubSignIn = async () => {
         await auth?.githubSignIn();
-        router.push("/get-repo")
+        router.push("/dashboard")
     }
 
     const handleUserSignIn = (event: React.FormEvent<HTMLFormElement>) => {

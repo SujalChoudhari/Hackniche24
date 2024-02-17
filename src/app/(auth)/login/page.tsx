@@ -21,18 +21,18 @@ export default function Patientloginin() {
         e.preventDefault();
         //@ts-ignore
         auth?.logInWithEmailPassword(emailRef.current.value, passwordRef.current.value);
-        router.push("/home")
+        router.push("/dashboard")
 
     };
 
     const handleGoogleSignIn = async () => {
         await auth?.googleSignIn();
-        router.push("/home")
+        router.push("/dashboard")
     }
 
     const handleGithubSignIn = async () => {
         await auth?.githubSignIn();
-        router.push("/get-repo")
+        router.push("/dashboard")
     }
 
     return (
