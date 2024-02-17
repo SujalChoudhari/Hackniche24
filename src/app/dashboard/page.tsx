@@ -17,9 +17,9 @@ export default function Dashboard() {
   return (
     <ResizablePanelGroup
       direction="horizontal"
-      className="min-h-[200px] w-full rounded-lg border"
+      className="  w-full rounded-lg border"
     >
-      <ResizablePanel defaultSize={25} className=" min-w-[200px]">
+      <ResizablePanel defaultSize={25} className=" ">
         <div className="flex h-full items-center justify-center p-6 border-2 ">
 
           <VersionControl />
@@ -41,17 +41,17 @@ export default function Dashboard() {
 
 
       <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={55}>
-
-        <ResizablePanelGroup direction="vertical" className="border ">
-          <ResizablePanel defaultSize={20} className="bg-">
-            <TestCases />
-          </ResizablePanel>
-          <ResizableHandle withHandle className="border " />
-          <ResizablePanel defaultSize={20}>
-            <JSON />
-          </ResizablePanel>
-        </ResizablePanelGroup>
+      <ResizablePanel defaultSize={45} className="">
+      
+      <ResizablePanelGroup direction="vertical" className="border ">
+      <ResizablePanel defaultSize={20} className="">
+        <TestCases/>
+      </ResizablePanel>
+      <ResizableHandle withHandle className="border  " />
+      <ResizablePanel defaultSize={20} className="">
+      <JSON/>
+      </ResizablePanel>
+    </ResizablePanelGroup>
       </ResizablePanel>
     </ResizablePanelGroup>
   )
