@@ -1,15 +1,7 @@
+import Replicate from "replicate";
 import { NextResponse } from "next/server";
 
-const {
-    GoogleGenerativeAI,
-    HarmCategory,
-    HarmBlockThreshold,
-} = require("@google/generative-ai");
-
-const MODEL_NAME = "gemini-pro";
-const API_KEY = "AIzaSyBotyCfAUwlXLv1hcJdXliYmhVkcF_V0lU";
-
-
+const REPLICATE_API_TOKEN = ""
 
 const promptMaker = (changes: string, inputSchema: string, outputSchema: string, dataSources: string) => {
     return `**Prompt:** ${changes}
@@ -32,46 +24,27 @@ const promptMaker = (changes: string, inputSchema: string, outputSchema: string,
     **Generated Code:** `;
 }
 
+const replicate = new Replicate({
+    auth: REPLICATE_API_TOKEN
+});
 async function run(text: string) {
-    const genAI = new GoogleGenerativeAI(API_KEY);
-    const model = genAI.getGenerativeModel({ model: MODEL_NAME });
-
-    const generationConfig = {
-        temperature: 0.9,
-        topK: 1,
-        topP: 1,
-        maxOutputTokens: 2048,
-    };
-
-    const safetySettings = [
+    const output: string[] | any = await replicate.run(
+        "meta/codellama-70b-instruct:a279116fe47a0f65701a8817188601e2fe8f4b9e04a518789655ea7b995851bf",
         {
-            category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-            category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-            category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-            category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-    ];
-
-    const parts: object[] = [{ text: text },];
-
-    const result = await model.generateContent({
-        contents: [{ role: "user", parts }],
-        generationConfig,
-        safetySettings,
-    });
-
-    const response = result.response;
-    return response.text();
+            input: {
+                top_k: 10,
+                top_p: 0.95,
+                prompt: text,
+                max_tokens: 500,
+                temperature: 0.8,
+                system_prompt: "",
+                repeat_penalty: 1.1,
+                presence_penalty: 0,
+                frequency_penalty: 0
+            }
+        }
+    );
+    return output.join(" ");
 }
 
 export async function GET(request: any) {
