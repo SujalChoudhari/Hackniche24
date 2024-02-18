@@ -9,7 +9,7 @@ export default function TabsDemo() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-900 to-blue-950">
           <p>Idea to code in seconds. Write it out, we'll build it</p>
-          <DummyContent imageSrc="/landing/images/1.png" />
+          <DummyContent imageSrc="/1.jpg" />
         </div>
       ),
     },
@@ -19,7 +19,7 @@ export default function TabsDemo() {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-900 to-blue-950">
           <p>Write like a pro, code like a prompt perfection</p>
-          <DummyContent imageSrc="/landing/images/2.png" />
+          <DummyContent imageSrc="/1.jpg" />
         </div>
       ),
     },
@@ -29,7 +29,7 @@ export default function TabsDemo() {
         content: (
           <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-900 to-blue-950">
             <p>Seamless data flow, clear input, perfect outpu</p>
-            <DummyContent imageSrc="/landing/images/3.png" />
+            <DummyContent imageSrc="/2.jpg" />
           </div>
         ),
       },
@@ -39,7 +39,7 @@ export default function TabsDemo() {
         content: (
           <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-900 to-blue-950">
             <p>See the logic before the code</p>
-            <DummyContent imageSrc="/landing/images/4.png" />
+            <DummyContent imageSrc="/3.jpg" />
           </div>
         ),
       },
@@ -49,7 +49,7 @@ export default function TabsDemo() {
         content: (
           <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-900 to-blue-950">
             <p>Experiment fearlessly, iterate effortlessly</p>
-            <DummyContent imageSrc="/landing/images/5.png" />
+            <DummyContent imageSrc="/4.jpg" />
           </div>
         ),
       },
@@ -59,7 +59,7 @@ export default function TabsDemo() {
         content: (
           <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-900 to-blue-950">
             <p></p>
-            <DummyContent imageSrc="/landing/images/6.png" />
+            <DummyContent imageSrc="/5.jpg" />
           </div>
         ),
       },
@@ -69,8 +69,8 @@ export default function TabsDemo() {
 
   return (
     <>
-     <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"><div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_700px_at_50%_500px,#f9c9ff,transparent)]"></div></div>
-    <div className="h-[20rem] md:h-[40rem] [perspective:1000px] relative b flex flex-col max-w-5xl mx-auto w-full  items-start justify-start my-40">
+     
+    <div className="h-[20rem] md:h-[40rem] [perspective:1000px] relative b flex flex-col  max-w-5xl mx-auto w-full  items-start justify-start my-40">
         
       <Tabs tabs={tabs} />
     </div>

@@ -28,7 +28,7 @@ export default function Landing() {
     </header>
     <TabsDemo />
     <div>
-    <p className=' text-3xl md:text-3xl  items-center justify-center '>Customer Feedback</p>
+    <p className=' text-3xl md:text-3xl text-white items-center justify-center mt-14 '>Customer Feedback</p>
     </div>
     <InfiniteMovingCardsDemo/>
     </main>
