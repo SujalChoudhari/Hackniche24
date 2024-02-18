@@ -28,8 +28,8 @@ export default function TabsDemo() {
         value: "Structured I/O",
         content: (
           <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-900 to-blue-950">
-            <p>Seamless data flow, clear input, perfect outpu</p>
-            <DummyContent imageSrc="/2.jpg" />
+            <p>Seamless data flow, clear input, perfect output</p>
+            <DummyContent imageSrc="/3.jpg" />
           </div>
         ),
       },
@@ -39,7 +39,7 @@ export default function TabsDemo() {
         content: (
           <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-900 to-blue-950">
             <p>See the logic before the code</p>
-            <DummyContent imageSrc="/3.jpg" />
+            <DummyContent imageSrc="/2.jpg" />
           </div>
         ),
       },
@@ -49,17 +49,17 @@ export default function TabsDemo() {
         content: (
           <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-900 to-blue-950">
             <p>Experiment fearlessly, iterate effortlessly</p>
-            <DummyContent imageSrc="/4.jpg" />
+            <DummyContent imageSrc="/5.jpg" />
           </div>
         ),
       },
       {
-        title: "Collaboration",
-        value: "Collaboration",
+        title: "VS code",
+        value: "VS code",
         content: (
           <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-900 to-blue-950">
-            <p></p>
-            <DummyContent imageSrc="/5.jpg" />
+            <p>Ensure secure and authorized deployment process</p>
+            <DummyContent imageSrc="/6.jpg" />
           </div>
         ),
       },

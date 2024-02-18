@@ -3,6 +3,7 @@ import React from 'react'
 import Spline from '@splinetool/react-spline'
 import TabsDemo from '@/components/component/exampletab'
 import { InfiniteMovingCardsDemo } from '@/components/component/infinite-moving-cards'
+import UILan from '@/components/uilan'
 
 export default function Landing() {
 
@@ -31,6 +32,7 @@ export default function Landing() {
     <p className=' text-3xl md:text-3xl text-white items-center justify-center mt-14 '>Customer Feedback</p>
     </div>
     <InfiniteMovingCardsDemo/>
+    <UILan />
     </main>
     </>
   )
