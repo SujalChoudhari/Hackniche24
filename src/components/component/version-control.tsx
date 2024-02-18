@@ -31,7 +31,7 @@ export function VersionControl({
     async function getHistory() {
       try {
         setLoading(true);
-        const resultList = await pb.collection('history').getList(1, 7, {});
+        const resultList = await pb.collection('history').getList(1, 30, {});
         setVersionData(resultList.items.reverse());
       } catch (e) {
         console.log(e)
@@ -79,9 +79,10 @@ export function VersionControl({
                   <div className="text-sm">{version.prompt.slice(0, 20)} ...</div>
                   <div className="flex justify-between items-center text-sm">
                     <span>{formatDistanceToNowStrict(new Date(version.created))} ago</span>
+                    <span>LOC: {(version.code.match(/\n/g) || []).length}</span>
                     <Avatar className="w-8 h-8">
                       <AvatarImage src={version.pfp} className="rounded-full" />
-                      <AvatarFallback>CN</AvatarFallback>
+                      <AvatarFallback>SC</AvatarFallback>
                     </Avatar>
                   </div>
                 </div>

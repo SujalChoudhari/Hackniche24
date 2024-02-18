@@ -11,11 +11,11 @@ export function InputChips({ inputRef, outputRef, dataSourcesRef }: { inputRef: 
   const [activeTab, setActiveTab] = useState('Data Sources');
 
   return (
-    <div className='overflow-y-auto h-full'>
+    <div className='overflow-y-auto h-full bg-white'>
     <Card>
       <CardContent>
         <div className="bg-white p-8 ">
-          <div className="flex items-center space-x-4 mb-6 min-w-[300px]">
+          <div className="flex items-center space-x-4 pb-6 min-w-[300px]">
             <TerminalIcon className="text-black" />
           </div>
           <div className="flex flex-col space-y-4">
