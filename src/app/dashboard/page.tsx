@@ -46,7 +46,7 @@ export default function Dashboard() {
     // @ts-ignore
     dataSourcesRef.current.value = dataSources;
 
-    const URL = `http://localhost:3000/api/code?changes=${prompt}&inputSchema=${inputSchema}&outputSchema=${outputSchema}&dataSources=${dataSources}`
+    const URL = `/api/code?changes=${prompt}&inputSchema=${inputSchema}&outputSchema=${outputSchema}&dataSources=${dataSources}`
     const respose = await axios.get(URL);
     console.log(respose.data)
     setLang(respose.data.language);
