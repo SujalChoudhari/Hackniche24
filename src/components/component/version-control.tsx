@@ -31,7 +31,7 @@ export function VersionControl({
     async function getHistory() {
       try {
         setLoading(true);
-        const resultList = await pb.collection('history').getList(1, 30, {});
+        const resultList = await pb.collection('history').getList(1, 40, {});
         setVersionData(resultList.items.reverse());
       } catch (e) {
         console.log(e)
